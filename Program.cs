@@ -10,6 +10,9 @@ namespace PIIS_labs
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Lab 1\n");
+
+            Console.ReadLine();
         }
     }
 }
