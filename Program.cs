@@ -12,6 +12,8 @@ namespace PIIS_labs
         {
             Console.WriteLine("Lab 1\n");
 
+            Labyrinth labyrinth = new Labyrinth("labyrinth1");
+
             Console.ReadLine();
         }
     }

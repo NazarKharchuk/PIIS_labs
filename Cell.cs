@@ -8,19 +8,19 @@ namespace PIIS_labs
 {
     class Cell
     {
-        public int x { get; set; }
-        public int y { get; set; }
+        public int col { get; set; }
+        public int row { get; set; }
 
         public Cell()
         {
-            x = 0;
-            y = 0;
+            col = 0;
+            row = 0;
         }
 
-        public Cell(int _x, int _y)
+        public Cell(int _col, int _row)
         {
-            x = _x;
-            y = _y;
+            col = _col;
+            row = _row;
         }
     }
 }
