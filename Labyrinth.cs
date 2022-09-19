@@ -54,8 +54,6 @@ namespace PIIS_labs
                 string[] finish_coordinates = line.Split(' ');
                 finish_cell = new Cell(Convert.ToInt32(finish_coordinates[0]), Convert.ToInt32(finish_coordinates[1]));
 
-                Console.WriteLine("\t\t\t\t5555555");
-
                 labyrinth = new List<List<int>>();
                 for(int i = 0; i < rows; i++)
                 {
@@ -68,7 +66,11 @@ namespace PIIS_labs
                     }
                 }
 
-                Console.WriteLine("\t\t\t\t66666666666");
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < columns; j++)
+                        if (labyrinth[i][j] == 1) labyrinth[i][j] = -1;
+                }
 
                 sr.Close();
             }
