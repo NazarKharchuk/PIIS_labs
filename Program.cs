@@ -14,35 +14,27 @@ namespace PIIS_labs
 
             Labyrinth labyrinth = new Labyrinth("labyrinth2");
 
-            /*LeeAlgorithm lee = new LeeAlgorithm(labyrinth);
+            Console.WriteLine("1 - Lee\t2 - AStar");
+            string key = Console.ReadLine();
 
-            if (lee.lee_algorithm())
+            Console.Clear();
+            switch (key)
             {
-                Console.WriteLine("yes");
-            }
-            else
-            {
-                Console.WriteLine("no");
-            }*/
+                case "1":
+                    LeeAlgorithm lee = new LeeAlgorithm(labyrinth);
 
-            AStarAlgorithm a_star = new AStarAlgorithm(labyrinth);
+                    lee.lee_algorithm();
+                    lee.show_path();
+                    break;
+                case "2":
+                    AStarAlgorithm a_star = new AStarAlgorithm(labyrinth);
 
-            if (a_star.astar_algorithm())
-            {
-                Console.WriteLine("yes");
-                a_star.show_path();
-            }
-            else
-            {
-                Console.WriteLine("no");
-            }
-
-
-            for (int i = 0; i < labyrinth.rows; i++)
-            {
-                for (int j = 0; j < labyrinth.columns; j++)
-                    Console.Write(String.Format("{0,2}", labyrinth.labyrinth[i][j]));
-                Console.WriteLine();
+                    a_star.astar_algorithm();
+                    a_star.show_path();
+                    break;
+                default:
+                    Console.WriteLine("Eror");
+                    break;
             }
 
             Console.ReadLine();

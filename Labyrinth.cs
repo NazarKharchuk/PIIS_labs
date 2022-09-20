@@ -21,7 +21,7 @@ namespace PIIS_labs
         {
             read_labyrinth(file_name);
 
-            Console.WriteLine("Col: " + columns + "\tRow: " + rows + "\nStart: col=" + start_cell.col + "; row=" + start_cell.row + ";\n" +
+            /*Console.WriteLine("Col: " + columns + "\tRow: " + rows + "\nStart: col=" + start_cell.col + "; row=" + start_cell.row + ";\n" +
                 "Finish: col=" + finish_cell.col + "; row=" + finish_cell.row + ";\n" +
                 "Labyrinth:");
             for(int i = 0; i < rows; i++)
@@ -29,7 +29,7 @@ namespace PIIS_labs
                 for (int j = 0; j < columns; j++)
                     Console.Write(String.Format("{0,2}", labyrinth[i][j]));
                 Console.WriteLine();
-            }
+            }*/
         }
 
         private void read_labyrinth(string file_name)

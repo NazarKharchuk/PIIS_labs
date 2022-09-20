@@ -142,6 +142,7 @@ namespace PIIS_labs
 
         public void show_path()
         {
+            Console.WriteLine("A Star algorithm");
             if (find_path)
             {
                 Cell curr = labyrinth.finish_cell;
