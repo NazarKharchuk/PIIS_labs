@@ -29,5 +29,14 @@ namespace PIIS_labs
             h_value = h;
             f_value = g + h;
         }
+
+        public AStarNode(Cell _coordinates, int h)
+        {
+            coordinates = _coordinates;
+            parent = null;
+            g_value = 0;
+            h_value = h;
+            f_value = 0;
+        }
     }
 }

@@ -26,14 +26,13 @@ namespace PIIS_labs
                 return false;
 
             labyrinth.labyrinth[labyrinth.start_cell.row][labyrinth.start_cell.col] = 1;
+            if (labyrinth.start_cell.col == labyrinth.finish_cell.col && labyrinth.start_cell.row == labyrinth.finish_cell.row)
+                return true;
             queue.Enqueue(labyrinth.start_cell);
 
             while (queue.Count() != 0)
             {
                 Cell temp_cell = queue.Dequeue();
-
-                if (temp_cell.col == labyrinth.finish_cell.col && temp_cell.row == labyrinth.finish_cell.row)
-                    return true;
 
                 Cell new_temp_cell;
                 for (int t = 0; t < 4; t++)
@@ -42,6 +41,10 @@ namespace PIIS_labs
                     if (check_cell(new_temp_cell) && labyrinth.labyrinth[new_temp_cell.row][new_temp_cell.col] == -1)
                     {
                         labyrinth.labyrinth[new_temp_cell.row][new_temp_cell.col] = 1 + labyrinth.labyrinth[temp_cell.row][temp_cell.col];
+
+                        if (new_temp_cell.col == labyrinth.finish_cell.col && new_temp_cell.row == labyrinth.finish_cell.row)
+                            return true;  
+                        
                         queue.Enqueue(new_temp_cell);
                     }
                 }

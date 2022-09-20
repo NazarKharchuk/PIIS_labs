@@ -14,7 +14,7 @@ namespace PIIS_labs
 
             Labyrinth labyrinth = new Labyrinth("labyrinth2");
 
-            LeeAlgorithm lee = new LeeAlgorithm(labyrinth);
+            /*LeeAlgorithm lee = new LeeAlgorithm(labyrinth);
 
             if (lee.lee_algorithm())
             {
@@ -23,8 +23,18 @@ namespace PIIS_labs
             else
             {
                 Console.WriteLine("no");
-            }
+            }*/
 
+            AStarAlgorithm a_star = new AStarAlgorithm(labyrinth);
+
+            if (a_star.astar_algorithm())
+            {
+                Console.WriteLine("yes");
+            }
+            else
+            {
+                Console.WriteLine("no");
+            }
 
 
             for (int i = 0; i < labyrinth.rows; i++)

@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AStarAlgorithm.cs" />
+    <Compile Include="AStarNode.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="Labyrinth.cs" />
     <Compile Include="LeeAlgorithm.cs" />

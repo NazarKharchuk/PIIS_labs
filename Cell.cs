@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PIIS_labs
 {
-    class Cell
+    class Cell : IEquatable<Cell>
     {
         public int col { get; set; }
         public int row { get; set; }
@@ -21,6 +21,11 @@ namespace PIIS_labs
         {
             col = _col;
             row = _row;
+        }
+
+        public bool Equals(Cell other)
+        {
+            return this.col == other.col && this.row == other.row;
         }
     }
 }
