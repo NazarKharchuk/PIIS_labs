@@ -30,6 +30,7 @@ namespace PIIS_labs
             if (a_star.astar_algorithm())
             {
                 Console.WriteLine("yes");
+                a_star.show_path();
             }
             else
             {

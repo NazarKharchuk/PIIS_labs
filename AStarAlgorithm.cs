@@ -16,6 +16,8 @@ namespace PIIS_labs
         private int[] rowNum = { 1, 1, 0, -1, -1, -1, 0, 1 };
         private int[] colNum = { 0, 1, 1, 1, 0, -1, -1, -1 };
 
+        public bool find_path;
+
         public AStarAlgorithm(Labyrinth _labyrinth)
         {
 
@@ -32,7 +34,6 @@ namespace PIIS_labs
                     node_matrix[i].Add(new AStarNode(new Cell(j, i), heuristic(new Cell(j, i))));
                 }
             }
-
         }
 
         private int heuristic(Cell cell)
@@ -43,7 +44,11 @@ namespace PIIS_labs
         public bool astar_algorithm()
         {
             if (!check_cell(labyrinth.start_cell) || !check_cell(labyrinth.finish_cell))
+            {
+                find_path = false;
                 return false;
+            }
+                
 
             open_list.Add(new Cell(labyrinth.start_cell.col, labyrinth.start_cell.row));
             node_matrix[labyrinth.start_cell.row][labyrinth.start_cell.col].g_value = 0;
@@ -55,11 +60,16 @@ namespace PIIS_labs
                 curr = get_min_f();
 
                 if (curr.col == labyrinth.finish_cell.col && curr.row == labyrinth.finish_cell.row)
+                {
+                    find_path = true;
                     return true;
+                }
+                    
 
                 add_children(curr);
             }
 
+            find_path = false;
             return false;
         }
 
@@ -127,6 +137,70 @@ namespace PIIS_labs
                         node_matrix[new_temp_cell.row][new_temp_cell.col].f_value = temp_g + node_matrix[new_temp_cell.row][new_temp_cell.col].h_value;
                     }
                 }
+            }
+        }
+
+        public void show_path()
+        {
+            if (find_path)
+            {
+                Cell curr = labyrinth.finish_cell;
+                List<Cell> path = new List<Cell>();
+                while(curr.col != labyrinth.start_cell.col || curr.row != labyrinth.start_cell.row)
+                {
+                    path.Add(curr);
+                    curr = node_matrix[curr.row][curr.col].parent;
+                }
+                path.Add(curr);
+
+                for (int i = 0; i < labyrinth.rows; i++)
+                {
+                    for (int j = 0; j < labyrinth.columns; j++)
+                    {
+                        if(node_matrix[i][j].coordinates.col == labyrinth.start_cell.col && node_matrix[i][j].coordinates.row == labyrinth.start_cell.row)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Green;
+                            Console.Write(String.Format("{0,3}", ""));
+                            Console.ResetColor();
+                            continue;
+                        }
+                        if (node_matrix[i][j].coordinates.col == labyrinth.finish_cell.col && node_matrix[i][j].coordinates.row == labyrinth.finish_cell.row)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Red;
+                            Console.Write(String.Format("{0,3}", ""));
+                            Console.ResetColor();
+                            continue;
+                        }
+                        if (path.Contains(node_matrix[i][j].coordinates))
+                        {
+                            Console.BackgroundColor = ConsoleColor.White;
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write(String.Format("{0,3}", "* "));
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            if(labyrinth.labyrinth[i][j]==0)
+                            {
+                                Console.BackgroundColor = ConsoleColor.Gray;
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write(String.Format("{0,3}", ""));
+                            }
+                            else
+                            {
+                                Console.BackgroundColor = ConsoleColor.White;
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write(String.Format("{0,3}", ""));
+                            }
+                            Console.ResetColor();
+                        }
+                    }
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Path not found");
             }
         }
     }
