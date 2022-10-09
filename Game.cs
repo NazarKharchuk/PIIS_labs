@@ -23,25 +23,60 @@ namespace PIIS_labs
         public void run()
         {
             LeeAlgorithm lee;
+            MinimaxAlgorithm minimax;
 
             show();
 
-            for(int i = 0; i<15; i++)
+            //for(int i = 0; i < 15; i++)
+            while(true)
             {
+                if (player_position.col == enemy_position.col && player_position.row == enemy_position.row)
+                {
+                    Console.WriteLine("The player lost(");
+                    break;
+                }
+
+                if (player_position.col == labyrinth.finish_cell.col && player_position.row == labyrinth.finish_cell.row)
+                {
+                    Console.WriteLine("The player won)");
+                    break;
+                }
+
                 lee = new LeeAlgorithm(labyrinth, new Cell(enemy_position), new Cell(player_position));
 
                 lee.lee_algorithm();
 
                 int[] x = lee.path_step();
-                Thread.Sleep(1000);
 
-                enemy_position.col = x[0];
-                enemy_position.row = x[1];
+                if (x[0] != -1 && x[1] != -1)
+                {
+                    enemy_position.col = x[0];
+                    enemy_position.row = x[1];
+                }
 
-                if(player_position == enemy_position)
+                if (player_position.col == enemy_position.col && player_position.row == enemy_position.row)
                 {
                     Console.WriteLine("The player lost(");
+                    break;
                 }
+
+                if (player_position.col == labyrinth.finish_cell.col && player_position.row == labyrinth.finish_cell.row)
+                {
+                    Console.WriteLine("The player won)");
+                    break;
+                }
+
+                minimax = new MinimaxAlgorithm(labyrinth, new Cell(player_position), new Cell(enemy_position));
+
+                int[] y = minimax.path_step();
+
+                if (y[0] != -1 && y[1] != -1)
+                {
+                    player_position.col = y[0];
+                    player_position.row = y[1];
+                }
+
+                Thread.Sleep(100);
 
                 show();
             }

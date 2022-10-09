@@ -40,7 +40,7 @@ namespace PIIS_labs
             columns = _labyrinth.columns;
             rows = _labyrinth.rows;
             start_cell = new Cell();
-            finish_cell = new Cell();
+            finish_cell = new Cell(_labyrinth.finish_cell);
             enemy_start_cell = new Cell();
 
             labyrinth = new List<List<int>>();

@@ -107,8 +107,11 @@ namespace PIIS_labs
                         }
                     }
                 }
-                step[0] = path[path.Count() - 1].col;
-                step[1] = path[path.Count() - 1].row;
+                if (path.Count() != 0)
+                {
+                    step[0] = path[path.Count() - 1].col;
+                    step[1] = path[path.Count() - 1].row;
+                }
                 path.Add(curr);
 
                 /*for (int i = 0; i < labyrinth.rows; i++)
