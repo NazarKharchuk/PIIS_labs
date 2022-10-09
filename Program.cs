@@ -10,6 +10,12 @@ namespace PIIS_labs
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Lab 1\n");
+
+            Labyrinth labyrinth = new Labyrinth("labyrinth1");
+
+
+            Console.ReadLine();
         }
     }
 }
