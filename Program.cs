@@ -14,9 +14,11 @@ namespace PIIS_labs
 
             Labyrinth labyrinth = new Labyrinth("labyrinth1");
 
-            //Labyrinth labyrinth2 = new Labyrinth(labyrinth);
+            Game game = new Game(labyrinth);
 
-            LeeAlgorithm lee = new LeeAlgorithm(labyrinth, new Cell(1, 1), new Cell(4, 9));
+            game.run();
+
+            /*LeeAlgorithm lee = new LeeAlgorithm(labyrinth, new Cell(1, 1), new Cell(4, 9));
 
             lee.lee_algorithm();
 
@@ -33,17 +35,7 @@ namespace PIIS_labs
                 for (int j = 0; j < labyrinth.columns; j++)
                     Console.Write(String.Format("{0,2}", labyrinth.labyrinth[i][j]));
                 Console.WriteLine();
-            }
-
-            /*Console.WriteLine("2\n");
-
-            for (int i = 0; i < labyrinth2.rows; i++)
-            {
-                for (int j = 0; j < labyrinth2.columns; j++)
-                    Console.Write(String.Format("{0,2}", labyrinth2.labyrinth[i][j]));
-                Console.WriteLine();
             }*/
-
 
             Console.ReadLine();
         }

@@ -83,7 +83,7 @@ namespace PIIS_labs
 
         public int[] path_step()
         {
-            Console.WriteLine("Lee algorithm");
+            //Console.WriteLine("Lee algorithm");
             int[] step = { -1, -1};
             if (find_path)
             {
@@ -111,7 +111,7 @@ namespace PIIS_labs
                 step[1] = path[path.Count() - 1].row;
                 path.Add(curr);
 
-                for (int i = 0; i < labyrinth.rows; i++)
+                /*for (int i = 0; i < labyrinth.rows; i++)
                 {
                     for (int j = 0; j < labyrinth.columns; j++)
                     {
@@ -160,7 +160,7 @@ namespace PIIS_labs
                     for (int j = 0; j < labyrinth.columns; j++)
                         Console.Write(String.Format("{0,3}", labyrinth.labyrinth[i][j]));
                     Console.WriteLine();
-                }
+                }*/
 
                 return step;
             }

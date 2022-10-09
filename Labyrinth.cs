@@ -22,7 +22,7 @@ namespace PIIS_labs
         {
             read_labyrinth(file_name);
 
-            Console.WriteLine("Col: " + columns + "\tRow: " + rows + 
+            /*Console.WriteLine("Col: " + columns + "\tRow: " + rows + 
                 "\nStart: col=" + start_cell.col + "; row=" + start_cell.row + ";\n" +
                 "Finish: col=" + finish_cell.col + "; row=" + finish_cell.row + ";\n" +
                 "Start(Enemy): col=" + enemy_start_cell.col + "; row=" + enemy_start_cell.row + ";\n" +
@@ -32,7 +32,7 @@ namespace PIIS_labs
                 for (int j = 0; j < columns; j++)
                     Console.Write(String.Format("{0,2}", labyrinth[i][j]));
                 Console.WriteLine();
-            }
+            }*/
         }
 
         public Labyrinth(Labyrinth _labyrinth)
@@ -53,7 +53,7 @@ namespace PIIS_labs
                 }
             }
 
-            Console.WriteLine("\t\tNew labyrinth:");
+            /*Console.WriteLine("\t\tNew labyrinth:");
             Console.WriteLine("Col: " + columns + "\tRow: " + rows +
                 "\nStart: col=" + start_cell.col + "; row=" + start_cell.row + ";\n" +
                 "Finish: col=" + finish_cell.col + "; row=" + finish_cell.row + ";\n" +
@@ -64,7 +64,7 @@ namespace PIIS_labs
                 for (int j = 0; j < columns; j++)
                     Console.Write(String.Format("{0,2}", labyrinth[i][j]));
                 Console.WriteLine();
-            }
+            }*/
         }
 
         private void read_labyrinth(string file_name)
