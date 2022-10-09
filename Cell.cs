@@ -23,6 +23,12 @@ namespace PIIS_labs
             row = _row;
         }
 
+        public Cell(Cell cell)
+        {
+            col = cell.col;
+            row = cell.row;
+        }
+
         public bool Equals(Cell other)
         {
             return this.col == other.col && this.row == other.row;

@@ -35,6 +35,38 @@ namespace PIIS_labs
             }
         }
 
+        public Labyrinth(Labyrinth _labyrinth)
+        {
+            columns = _labyrinth.columns;
+            rows = _labyrinth.rows;
+            start_cell = new Cell();
+            finish_cell = new Cell();
+            enemy_start_cell = new Cell();
+
+            labyrinth = new List<List<int>>();
+            for (int i = 0; i < rows; i++)
+            {
+                labyrinth.Add(new List<int>());
+                for (int j = 0; j < columns; j++)
+                {
+                    labyrinth[i].Add(_labyrinth.labyrinth[i][j]);
+                }
+            }
+
+            Console.WriteLine("\t\tNew labyrinth:");
+            Console.WriteLine("Col: " + columns + "\tRow: " + rows +
+                "\nStart: col=" + start_cell.col + "; row=" + start_cell.row + ";\n" +
+                "Finish: col=" + finish_cell.col + "; row=" + finish_cell.row + ";\n" +
+                "Start(Enemy): col=" + enemy_start_cell.col + "; row=" + enemy_start_cell.row + ";\n" +
+                "Labyrinth:");
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                    Console.Write(String.Format("{0,2}", labyrinth[i][j]));
+                Console.WriteLine();
+            }
+        }
+
         private void read_labyrinth(string file_name)
         {
             string path = "D:/Code/PIIS_labs/labyrinths/" + file_name + ".txt";
