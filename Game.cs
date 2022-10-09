@@ -24,12 +24,21 @@ namespace PIIS_labs
         {
             LeeAlgorithm lee;
             MinimaxAlgorithm minimax;
+            AlphaBetaAlgorithm alpha_beta;
+
+            char algo;
+            Console.WriteLine("1 - minimax; 2 - alpha-beta;");
+            algo = Console.ReadLine()[0];
+
 
             show();
 
             //for(int i = 0; i < 15; i++)
             while(true)
             {
+                if (algo == '1') Console.WriteLine("minimax;");
+                else Console.WriteLine("alpha-beta;");
+
                 if (player_position.col == enemy_position.col && player_position.row == enemy_position.row)
                 {
                     Console.WriteLine("The player lost(");
@@ -66,9 +75,18 @@ namespace PIIS_labs
                     break;
                 }
 
-                minimax = new MinimaxAlgorithm(labyrinth, new Cell(player_position), new Cell(enemy_position));
+                int[] y;
+                if (algo == '1')
+                {
+                    minimax = new MinimaxAlgorithm(labyrinth, new Cell(player_position), new Cell(enemy_position));
+                    y = minimax.path_step();
+                }
+                else
+                {
+                    alpha_beta = new AlphaBetaAlgorithm(labyrinth, new Cell(player_position), new Cell(enemy_position));
 
-                int[] y = minimax.path_step();
+                    y = alpha_beta.path_step();
+                }
 
                 if (y[0] != -1 && y[1] != -1)
                 {

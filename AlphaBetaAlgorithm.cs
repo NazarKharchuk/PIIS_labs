@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace PIIS_labs
 {
-    class MinimaxAlgorithm
+    class AlphaBetaAlgorithm
     {
         public Labyrinth labyrinth { get; set; }
         private int[] rowNum = { 1, 0, -1, 0 };
         private int[] colNum = { 0, 1, 0, -1 };
 
-        public MinimaxAlgorithm(Labyrinth _labyrinth, Cell player_start, Cell enemy_start)
+        public AlphaBetaAlgorithm(Labyrinth _labyrinth, Cell player_start, Cell enemy_start)
         {
             labyrinth = new Labyrinth(_labyrinth);
             labyrinth.start_cell = player_start;
             labyrinth.enemy_start_cell = enemy_start;
         }
 
-        public int minimax(int depth, Cell player, Cell enemy, bool isMax)
+        public int alpha_beta(int depth, Cell player, Cell enemy, int alpha, int beta, bool isMax)
         {
             if (depth == 0 || (player.col == labyrinth.finish_cell.col && player.row == labyrinth.finish_cell.row) || (player.col == enemy.col && player.row == enemy.row))
             {
@@ -38,8 +38,10 @@ namespace PIIS_labs
                     temp.row += rowNum[i];
                     if (check_cell(temp))
                     {
-                        value = minimax(depth - 1, temp, enemy, false);
+                        value = alpha_beta(depth - 1, temp, enemy, alpha, beta, false);
                         if (max_value < value) max_value = value;
+                        if (alpha < value) alpha = value;
+                        if (beta <= alpha) break;
                     }
                 }
                 return max_value;
@@ -56,8 +58,10 @@ namespace PIIS_labs
                     temp.row += rowNum[i];
                     if (check_cell(temp))
                     {
-                        value = minimax(depth - 1, player, temp, true);
+                        value = alpha_beta(depth - 1, player, temp, alpha, beta, true);
                         if (min_value > value) min_value = value;
+                        if (beta > value) beta = value;
+                        if (beta <= alpha) break;
                     }
                 }
                 return min_value;
@@ -99,7 +103,7 @@ namespace PIIS_labs
                 temp.row += rowNum[i];
                 if (check_cell(temp))
                 {
-                    value = minimax(5, temp, labyrinth.enemy_start_cell, false);
+                    value = alpha_beta(5, temp, labyrinth.enemy_start_cell, -1000, 1000, false);
                     if (max_value < value)
                     {
                         max_value = value;
