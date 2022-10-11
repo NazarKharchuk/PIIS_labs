@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Diagnostics;
 
 namespace PIIS_labs
 {
@@ -30,15 +31,12 @@ namespace PIIS_labs
             Console.WriteLine("1 - minimax; 2 - alpha-beta;");
             algo = Console.ReadLine()[0];
 
+            Stopwatch clock = new Stopwatch();
 
-            show();
+            show(algo);
 
-            //for(int i = 0; i < 15; i++)
             while(true)
             {
-                if (algo == '1') Console.WriteLine("minimax;");
-                else Console.WriteLine("alpha-beta;");
-
                 if (player_position.col == enemy_position.col && player_position.row == enemy_position.row)
                 {
                     Console.WriteLine("The player lost(");
@@ -76,16 +74,20 @@ namespace PIIS_labs
                 }
 
                 int[] y;
+                int depth = 10;
                 if (algo == '1')
                 {
                     minimax = new MinimaxAlgorithm(labyrinth, new Cell(player_position), new Cell(enemy_position));
-                    y = minimax.path_step();
+                    clock.Start();
+                    y = minimax.path_step(depth);
+                    clock.Stop();
                 }
                 else
                 {
                     alpha_beta = new AlphaBetaAlgorithm(labyrinth, new Cell(player_position), new Cell(enemy_position));
-
-                    y = alpha_beta.path_step();
+                    clock.Start();
+                    y = alpha_beta.path_step(depth);
+                    clock.Stop();
                 }
 
                 if (y[0] != -1 && y[1] != -1)
@@ -94,16 +96,20 @@ namespace PIIS_labs
                     player_position.row = y[1];
                 }
 
-                Thread.Sleep(100);
+               Thread.Sleep(100);
 
-                show();
+                show(algo);
             }
-
+            Console.WriteLine($"Spent time: {clock.Elapsed}");
         }
 
-        public void show()
+        public void show(char algo)
         {
             Console.Clear();
+
+            if (algo == '1') Console.WriteLine("minimax;");
+            else Console.WriteLine("alpha-beta;");
+
             for (int i = 0; i < labyrinth.rows; i++)
             {
                 for (int j = 0; j < labyrinth.columns; j++)

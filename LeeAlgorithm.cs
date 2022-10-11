@@ -114,57 +114,6 @@ namespace PIIS_labs
                 }
                 path.Add(curr);
 
-                /*for (int i = 0; i < labyrinth.rows; i++)
-                {
-                    for (int j = 0; j < labyrinth.columns; j++)
-                    {
-                        if (j == labyrinth.start_cell.col && i == labyrinth.start_cell.row)
-                        {
-                            Console.BackgroundColor = ConsoleColor.Green;
-                            Console.Write(String.Format("{0,3}", ""));
-                            Console.ResetColor();
-                            continue;
-                        }
-                        if (j == labyrinth.finish_cell.col && i == labyrinth.finish_cell.row)
-                        {
-                            Console.BackgroundColor = ConsoleColor.Red;
-                            Console.Write(String.Format("{0,3}", ""));
-                            Console.ResetColor();
-                            continue;
-                        }
-                        if (path.Contains(new Cell(j, i)))
-                        {
-                            Console.BackgroundColor = ConsoleColor.White;
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.Write(String.Format("{0,3}", labyrinth.labyrinth[i][j]));
-                            Console.ResetColor();
-                        }
-                        else
-                        {
-                            if (labyrinth.labyrinth[i][j] == 0)
-                            {
-                                Console.BackgroundColor = ConsoleColor.Gray;
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.Write(String.Format("{0,3}", ""));
-                            }
-                            else
-                            {
-                                Console.BackgroundColor = ConsoleColor.White;
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.Write(String.Format("{0,3}", ""));
-                            }
-                            Console.ResetColor();
-                        }
-                    }
-                    Console.WriteLine();
-                }
-                for (int i = 0; i < labyrinth.rows; i++)
-                {
-                    for (int j = 0; j < labyrinth.columns; j++)
-                        Console.Write(String.Format("{0,3}", labyrinth.labyrinth[i][j]));
-                    Console.WriteLine();
-                }*/
-
                 return step;
             }
             else

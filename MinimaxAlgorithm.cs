@@ -23,7 +23,7 @@ namespace PIIS_labs
         {
             if (depth == 0 || (player.col == labyrinth.finish_cell.col && player.row == labyrinth.finish_cell.row) || (player.col == enemy.col && player.row == enemy.row))
             {
-                return score(player, enemy);
+                return score(depth, player, enemy);
             }
 
             if (isMax)
@@ -64,11 +64,11 @@ namespace PIIS_labs
             }
         }
 
-        private int score(Cell player, Cell enemy)
+        private int score(int depth, Cell player, Cell enemy)
         {
-            if (player.col == labyrinth.finish_cell.col && player.row == labyrinth.finish_cell.row) return 999;
-            if (player.col == enemy.col && player.row == enemy.row) return -999;
-            return (-10 * (Math.Abs(player.col - labyrinth.finish_cell.col) + Math.Abs(player.row - labyrinth.finish_cell.row)));
+            if (player.col == labyrinth.finish_cell.col && player.row == labyrinth.finish_cell.row) return (900 + depth);
+            if (player.col == enemy.col && player.row == enemy.row) return -(900 + depth);
+            return ((Math.Abs(player.col - enemy.col) + Math.Abs(player.row - enemy.row)) + (-10 * (Math.Abs(player.col - labyrinth.finish_cell.col) + Math.Abs(player.row - labyrinth.finish_cell.row))));
         }
 
         private bool check_cell(Cell cell)
@@ -84,9 +84,8 @@ namespace PIIS_labs
             }
         }
 
-        public int[] path_step()
+        public int[] path_step(int depth)
         {
-            //Console.WriteLine("Lee algorithm");
             int[] step = { -1, -1 };
 
             int max_value = -1000;
@@ -99,7 +98,7 @@ namespace PIIS_labs
                 temp.row += rowNum[i];
                 if (check_cell(temp))
                 {
-                    value = minimax(5, temp, labyrinth.enemy_start_cell, false);
+                    value = minimax(depth, temp, labyrinth.enemy_start_cell, false);
                     if (max_value < value)
                     {
                         max_value = value;
