@@ -14,9 +14,9 @@ namespace PIIS_labs
         public PlayingField()
         {
             field = new CellContent[3, 3] {
-                {CellContent.OCell, CellContent.XCell, CellContent.OCell},
-                {CellContent.XCell, CellContent.OCell, CellContent.XCell},
-                {CellContent.XCell, CellContent.OCell, CellContent.XCell}
+                {CellContent.EmptyCell, CellContent.EmptyCell, CellContent.EmptyCell},
+                {CellContent.EmptyCell, CellContent.EmptyCell, CellContent.EmptyCell},
+                {CellContent.EmptyCell, CellContent.EmptyCell, CellContent.EmptyCell}
             };
         }
 
@@ -33,6 +33,7 @@ namespace PIIS_labs
 
         public void ShowField()
         {
+            Console.Clear();
             int winner, one, two, three;
             (winner, one, two, three) = check_field();
 
@@ -115,6 +116,18 @@ namespace PIIS_labs
             }
             if (count == 9) return (0, 0, 0, 0);
             else return (-1, 0, 0, 0);
+        }
+
+        public bool step(int coordinate, CellContent content)
+        {
+            int i, j;
+            (i, j) = NumberInCoordinates(coordinate);
+            if (field[i, j] == CellContent.EmptyCell)
+            {
+                field[i, j] = content;
+                return true;
+            }
+            else return false;
         }
     }
 }
