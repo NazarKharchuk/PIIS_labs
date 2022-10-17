@@ -38,13 +38,17 @@ namespace PIIS_labs
                 else return;
             }
 
-            if(player == CellContent.XCell)
+            string new_player_step;
+            if (player == CellContent.XCell)
             {
                 playing_field.ShowField();
                 Console.WriteLine("Your step");
-                string first_step = Console.ReadLine();
-                playing_field.step(Int32.Parse(first_step), player);
+                new_player_step = Console.ReadLine();
+                playing_field.step(Int32.Parse(new_player_step), player);
             }
+
+            IAlgorithm algorithm;
+            int next_AI_step;
 
             while(finish == false)
             {
@@ -52,6 +56,17 @@ namespace PIIS_labs
                 finish = check_finish();
                 if (finish) break;
 
+                algorithm = new MiniMax(playing_field, player, AI_player);
+                next_AI_step = algorithm.next_step();
+                playing_field.step(next_AI_step, AI_player);
+
+                playing_field.ShowField();
+                finish = check_finish();
+                if (finish) break;
+
+                Console.WriteLine("Your step");
+                new_player_step = Console.ReadLine();
+                playing_field.step(Int32.Parse(new_player_step), player);
             }
         }
 
@@ -62,7 +77,9 @@ namespace PIIS_labs
 
             if(winner == 0)
             {
-                Console.WriteLine("tie");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("tie");
+                Console.ResetColor();
                 return true;
             }
             else
@@ -71,11 +88,15 @@ namespace PIIS_labs
                 {
                     if(player == CellContent.XCell)
                     {
-                        Console.WriteLine("you won)");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("you won)");
+                        Console.ResetColor();
                     }
                     else
                     {
-                        Console.WriteLine("you lost(");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("you lost(");
+                        Console.ResetColor();
                     }
                     return true;
                 }
@@ -83,11 +104,15 @@ namespace PIIS_labs
                 {
                     if (player == CellContent.OCell)
                     {
-                        Console.WriteLine("you won)");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("you won)");
+                        Console.ResetColor();
                     }
                     else
                     {
-                        Console.WriteLine("you lost(");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("you lost(");
+                        Console.ResetColor();
                     }
                     return true;
                 }

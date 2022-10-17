@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace PIIS_labs
 {
-    class PlayingField
+    public class PlayingField
     {
         public CellContent[ , ] field;
 
@@ -22,7 +22,8 @@ namespace PIIS_labs
 
         public PlayingField(PlayingField _PlayingField)
         {
-            for(int i = 0; i < 3; i++)
+            field = new CellContent[3, 3];
+            for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
