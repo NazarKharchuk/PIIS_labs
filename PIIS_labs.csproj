@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlphaBetaNegaMax.cs" />
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="CellContent.cs" />
     <Compile Include="Game.cs" />
