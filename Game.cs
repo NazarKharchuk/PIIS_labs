@@ -56,7 +56,7 @@ namespace PIIS_labs
                 finish = check_finish();
                 if (finish) break;
 
-                algorithm = new MiniMax(playing_field, player, AI_player);
+                algorithm = new NegaMax(playing_field, player, AI_player);
                 next_AI_step = algorithm.next_step();
                 playing_field.step(next_AI_step, AI_player);
 

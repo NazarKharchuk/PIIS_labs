@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace PIIS_labs
 {
-    class MiniMax : IAlgorithm
+    class NegaMax: IAlgorithm
     {
         private PlayingField playing_field;
         private CellContent player;
         private CellContent AI_player;
 
-        public MiniMax(PlayingField field, CellContent _player, CellContent _AI_player)
+        public NegaMax(PlayingField field, CellContent _player, CellContent _AI_player)
         {
             playing_field = new PlayingField(field);
             player = _player;
@@ -24,14 +24,15 @@ namespace PIIS_labs
             int max_score = -2;
             int score;
             int best_move = -1;
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if(playing_field.field[i, j] == CellContent.EmptyCell)
+                    if (playing_field.field[i, j] == CellContent.EmptyCell)
                     {
                         playing_field.field[i, j] = AI_player;
-                        score = mini_max(playing_field, false);
+                        score = nega_max(playing_field, -1);
+                        score *= -1;
                         playing_field.field[i, j] = CellContent.EmptyCell;
 
                         if (score > max_score)
@@ -45,62 +46,37 @@ namespace PIIS_labs
             return best_move;
         }
 
-        public int mini_max(PlayingField field, bool isMax)
+        public int nega_max(PlayingField field, int color)
         {
             int winner, one, two, three;
             (winner, one, two, three) = field.check_field();
 
-            if(winner != -1)
+            if (winner != -1)
             {
-                return count_score(field);
+                return (color * count_score(field));
             }
 
-            if (isMax)
+            int max_score = -2;
+            int score;
+            for (int i = 0; i < 3; i++)
             {
-                int max_score = -2;
-                int score;
-                for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
                 {
-                    for (int j = 0; j < 3; j++)
+                    if (field.field[i, j] == CellContent.EmptyCell)
                     {
-                        if (field.field[i, j] == CellContent.EmptyCell)
-                        {
-                            field.field[i, j] = AI_player;
-                            score = mini_max(playing_field, false);
-                            field.field[i, j] = CellContent.EmptyCell;
+                        field.field[i, j] = (color == 1?AI_player:player);
+                        score = nega_max(playing_field, (-1 * color));
+                        score *= -1;
+                        field.field[i, j] = CellContent.EmptyCell;
 
-                            if (score > max_score)
-                            {
-                                max_score = score;
-                            }
+                        if (score > max_score)
+                        {
+                            max_score = score;
                         }
                     }
                 }
-                return max_score;
             }
-            else
-            {
-                int min_score = 2;
-                int score;
-                for (int i = 0; i < 3; i++)
-                {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        if (field.field[i, j] == CellContent.EmptyCell)
-                        {
-                            field.field[i, j] = player;
-                            score = mini_max(playing_field, true);
-                            field.field[i, j] = CellContent.EmptyCell;
-
-                            if (score < min_score)
-                            {
-                                min_score = score;
-                            }
-                        }
-                    }
-                }
-                return min_score;
-            }
+            return max_score;
         }
 
         public int count_score(PlayingField field)

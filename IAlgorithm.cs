@@ -9,6 +9,6 @@ namespace PIIS_labs
     public interface IAlgorithm
     {
         int next_step();
-        int score(PlayingField field);
+        int count_score(PlayingField field);
     }
 }
