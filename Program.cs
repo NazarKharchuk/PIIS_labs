@@ -10,6 +10,9 @@ namespace PIIS_labs
     {
         static void Main(string[] args)
         {
+            PlayingField f = new PlayingField();
+            f.ShowField();
+            Console.ReadLine();
         }
     }
 }
