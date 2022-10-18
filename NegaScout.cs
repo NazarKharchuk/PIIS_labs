@@ -21,8 +21,8 @@ namespace PIIS_labs
 
         public int next_step()
         {
-            Console.WriteLine("NegaScout");
-            System.Threading.Thread.Sleep(500);
+            //Console.WriteLine("NegaScout");
+            //System.Threading.Thread.Sleep(500);
 
             int max_score = -2;
             int score;
@@ -70,27 +70,25 @@ namespace PIIS_labs
                     {
                         iteration++;
 
-                        if(iteration == 1)
+                        field.field[i, j] = (color == 1 ? AI_player : player);
+
+                        if (iteration == 1)
                         {
-                            field.field[i, j] = (color == 1 ? AI_player : player);
                             score = nega_scout(playing_field, (-1 * color), (-1 * beta), (-1 * alpha));
                             score *= -1;
-                            field.field[i, j] = CellContent.EmptyCell;
                         }
                         else
                         {
-                            field.field[i, j] = (color == 1 ? AI_player : player);
                             score = nega_scout(playing_field, (-1 * color), (-1 * alpha -1), (-1 * alpha));
                             score *= -1;
-                            field.field[i, j] = CellContent.EmptyCell;
-                            if(alpha<score && score < beta)
+                            if(alpha < score && score < beta)
                             {
-                                field.field[i, j] = (color == 1 ? AI_player : player);
                                 score = nega_scout(playing_field, (-1 * color), (-1 * beta), (-1 * alpha));
                                 score *= -1;
-                                field.field[i, j] = CellContent.EmptyCell;
                             }
                         }
+
+                        field.field[i, j] = CellContent.EmptyCell;
 
 
                         if (score > alpha)

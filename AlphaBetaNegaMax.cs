@@ -21,8 +21,8 @@ namespace PIIS_labs
 
         public int next_step()
         {
-            Console.WriteLine("AlphaBetaNegaMax");
-            System.Threading.Thread.Sleep(500);
+            //Console.WriteLine("AlphaBetaNegaMax");
+            //System.Threading.Thread.Sleep(500);
 
             int max_score = -2;
             int score;
