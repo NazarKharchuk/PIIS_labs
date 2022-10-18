@@ -21,7 +21,10 @@ namespace PIIS_labs
 
         public void start()
         {
-            Console.WriteLine("X/O?");
+            Console.WriteLine("1 - NegaMax\t2 - AlphaBetaNegaMax\t3 - NegaScout\t4 - MiniMax");
+            string choice_algorithm = Console.ReadLine();
+
+            Console.WriteLine("\nX/O?");
             string choice = Console.ReadLine();
             if (choice == "X" || choice == "x")
             {
@@ -56,7 +59,21 @@ namespace PIIS_labs
                 finish = check_finish();
                 if (finish) break;
 
-                algorithm = new NegaScout(playing_field, player, AI_player);
+                switch(choice_algorithm){
+                    case "1":
+                        algorithm = new NegaMax(playing_field, player, AI_player);
+                        break;
+                    case "2":
+                        algorithm = new AlphaBetaNegaMax(playing_field, player, AI_player);
+                        break;
+                    case "3":
+                        algorithm = new NegaScout(playing_field, player, AI_player);
+                        break;
+                    default:
+                        algorithm = new MiniMax(playing_field, player, AI_player);
+                        break;
+                }
+
                 next_AI_step = algorithm.next_step();
                 playing_field.step(next_AI_step, AI_player);
 
