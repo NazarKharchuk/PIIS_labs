@@ -31,10 +31,14 @@ namespace PIIS_labs
                     Console.WriteLine("Count - " + rabin_karp.search());
                     break;
                 case 2:
+                    Console.Clear();
                     Console.WriteLine("\tDijkstra's algorithm:");
-                    Graph g = new Graph("graph1");
+                    Graph graph = new Graph("graph1");
+                    DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+                    dijkstra.find();
                     break;
                 case 3:
+                    Console.Clear();
                     Console.WriteLine("\tPrim's algorithm:");
                     break;
                 default:
