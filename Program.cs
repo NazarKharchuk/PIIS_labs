@@ -32,6 +32,7 @@ namespace PIIS_labs
                     break;
                 case 2:
                     Console.WriteLine("\tDijkstra's algorithm:");
+                    Graph g = new Graph("graph1");
                     break;
                 case 3:
                     Console.WriteLine("\tPrim's algorithm:");
