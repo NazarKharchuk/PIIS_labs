@@ -33,13 +33,16 @@ namespace PIIS_labs
                 case 2:
                     Console.Clear();
                     Console.WriteLine("\tDijkstra's algorithm:");
-                    Graph graph = new Graph("graph1");
-                    DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+                    Graph graph1 = new Graph("graph1");
+                    DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph1);
                     dijkstra.find();
                     break;
                 case 3:
                     Console.Clear();
                     Console.WriteLine("\tPrim's algorithm:");
+                    Graph graph2 = new Graph("graph2");
+                    PrimAlgorithm prim = new PrimAlgorithm(graph2);
+                    prim.find();
                     break;
                 default:
                     Console.WriteLine("Invalid algorithm(");
