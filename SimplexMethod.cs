@@ -32,13 +32,18 @@ namespace PIIS_labs
 
         public bool simplex_method()
         {
+            int iteration = 1;
             while (true)
             {
-                Console.WriteLine($"{simplex_table[0][0]}\t{simplex_table[1][0]}\t{simplex_table[2][0]}\t{simplex_table[3][0]}\t");
-                Console.WriteLine($"{simplex_table[0][1]}\t{simplex_table[1][1]}\t{simplex_table[2][1]}\t{simplex_table[3][1]}\t");
-                Console.WriteLine($"{simplex_table[0][2]}\t{simplex_table[1][2]}\t{simplex_table[2][2]}\t{simplex_table[3][2]}\t");
-                Console.WriteLine($"{simplex_table[0][3]}\t{simplex_table[1][3]}\t{simplex_table[2][3]}\t{simplex_table[3][3]}\t");
-                Console.WriteLine($"{simplex_table[0][4]}\t{simplex_table[1][4]}\t{simplex_table[2][4]}\t{simplex_table[3][4]}\t");
+                Console.WriteLine("\nIteration #" + iteration++ + "\nSimplex table:");
+                for (int i = 0; i < simplex_table.Count; i++)
+                {
+                    for (int j = 0; j < simplex_table[0].Count; j++)
+                    {
+                        Console.Write($"{simplex_table[j][i]}\t");
+                    }
+                    Console.Write("\n");
+                }
 
                 if (checking_optimal())
                 {
@@ -47,16 +52,15 @@ namespace PIIS_labs
                 }
 
                 int column = find_column();
-                if (column == -1) return false;
-                Console.WriteLine("col - " + column);
+                if (column == -1) { Console.WriteLine("Unable to select column."); return false; }
+                Console.WriteLine("Selected column: x" + simplex_table[column][0]);
 
                 int row = find_row(column);
-                if (row == -1) return false;
-                Console.WriteLine("row - " + row);
+                if (row == -1) { Console.WriteLine("The function f(x) is unbounded from below."); return false; }
+                Console.WriteLine("Selected row: x" + simplex_table[0][row]);
 
-                //double element = simplex_table[1][row] / simplex_table[column][row];
                 double element = simplex_table[column][row];
-                Console.WriteLine("element - " + element);
+                Console.WriteLine("Selected element: " + element);
 
                 simplex_table = new_table(column, row, element);
             }
@@ -110,11 +114,14 @@ namespace PIIS_labs
 
             for (int i = 2; i < n - m + 2; i++)
             {
-                value = simplex_table[1][i] / simplex_table[col][i];
-                if (value < min_value)
+                if(simplex_table[col][i] > 0)
                 {
-                    min_value = value;
-                    row = i;
+                    value = simplex_table[1][i] / simplex_table[col][i];
+                    if (value < min_value)
+                    {
+                        min_value = value;
+                        row = i;
+                    }
                 }
             }
 
