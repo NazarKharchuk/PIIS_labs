@@ -35,15 +35,9 @@ namespace PIIS_labs
             int iteration = 1;
             while (true)
             {
-                Console.WriteLine("\nIteration #" + iteration++ + "\nSimplex table:");
-                for (int i = 0; i < simplex_table.Count; i++)
-                {
-                    for (int j = 0; j < simplex_table[0].Count; j++)
-                    {
-                        Console.Write($"{simplex_table[j][i]}\t");
-                    }
-                    Console.Write("\n");
-                }
+                Console.WriteLine("\nIteration #" + iteration++);
+
+                outpup_table();
 
                 if (checking_optimal())
                 {
@@ -165,6 +159,31 @@ namespace PIIS_labs
 
 
             return table;
+        }
+
+        private void outpup_table()
+        {
+            Console.WriteLine("\nSimplex table:");
+            for (int j = 0; j < simplex_table[0].Count; j++)
+            {
+                for (int i = 0; i < simplex_table.Count; i++)
+                {
+                    if (i == 0 && j == 0) { Console.Write("\t"); continue; }
+                    if (i == 1 && j == 0) { Console.Write("B\t"); continue; }
+                    if (i == 0 && j == 1) { Console.Write("F\t"); continue; }
+                    if (i == 0 || j == 0)
+                    {
+                        Console.Write($"x{simplex_table[i][j]}\t");
+                    }
+                    else
+                    {
+                        Console.Write($"{simplex_table[i][j]}\t");
+                    }
+
+                }
+                Console.Write("\n");
+            }
+            return;
         }
     }
 }
